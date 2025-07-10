@@ -1,19 +1,20 @@
 'use client';
+import Link from 'next/link';
+import SecondHeader from './SecondHeader';
 
-export default function Header() {
+export default function Header({ logged }) {
+  logged = true;
   return (
-    <header className="flex items-center justify-between p-4 bg-[#0b2344] shadow-md">
-      <div className="flex items-center gap-4">
-        <img src="/cmd_isologo_white.png" alt="CMD Logo" className="h-10 w-10" />
-        <h1 className="text-xl font-bold">CMD App - PAMI</h1>
-      </div>
-      <nav>
-        <ul className="flex space-x-4">
-          <li><a href="/">Inicio</a></li>
-          <li><a href="/about">Acerca de</a></li>
-          <li><a href="/contact">Contacto</a></li>
-        </ul>
-      </nav>
-    </header>
+    <>
+      <header className="flex items-center justify-between p-4 bg-[#0b2344] shadow-xl border-bottom z-50">
+        <div className="flex items-center gap-4">
+          <img src="/cmd_isologo_white.png" alt="CMD Logo" className="h-10 w-10" />
+        </div>
+        <div className="flex items-center gap-4">
+          <img src="/logo_pami_blanco.png" alt="PAMI Logo" className="w-20" />
+        </div>
+      </header>
+      {logged && <SecondHeader rol="admin" />}
+    </>
   );
 }
