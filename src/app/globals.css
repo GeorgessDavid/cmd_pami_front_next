@@ -1,19 +1,26 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+@import "tailwindcss";
+
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --font-family: 'Ubuntu', 'Nunito Sans' sans-serif;
+  --font-family: 'Ubuntu', 'Lato', 'Montserrat', 'Inria Sans' ,sans-serif;
+  --titles-foreground: #0b2344;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-family: var(--font-family);
+}
+
+* {
+  font-family: var(--font-family) !important;
+  font-weight: 400;
 }
 
 @media (prefers-color-scheme: light) {

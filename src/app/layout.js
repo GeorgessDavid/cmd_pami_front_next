@@ -1,6 +1,6 @@
 import "./globals.css";
 import Header from "@/components/Header";
-
+import ThemeRegistry from "@/components/ThemeRegistry";
 
 export const metadata = {
   title: "CMD App - PAMI",
@@ -14,8 +14,10 @@ export default function RootLayout({ children }) {
         <link rel="icon" href="/cmd_isologo_white.png" />
       </head>
       <body>
-        <Header />
-        <main>{children}</main>
+        <ThemeRegistry>
+          <Header />
+          <main>{children}</main>
+        </ThemeRegistry>
       </body>
     </html>
   );
