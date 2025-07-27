@@ -12,7 +12,7 @@ export default function LoginBox() {
         setShowPassword(!showPassword);
     };
     return (
-        <div className="w-[31.25rem] max-h-[500px] bg-[rgba(255,255,255,0.15)] backdrop-blur-3xl flex flex-col m-[5rem]">
+        <div className="w-[31.25rem] max-h-[500px] bg-[rgba(255,255,255,0.15)] backdrop-blur-[1rem] flex flex-col m-[5rem]">
             <h2 className="text-2xl font-semibold mb-4 text-center m-[1.5rem] color-[var(--titles-foreground)]">Iniciar Sesión</h2>
             <form className="flex flex-col items-center gap-4 p-4">
                 <TextField
