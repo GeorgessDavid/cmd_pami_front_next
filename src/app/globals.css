@@ -12,6 +12,15 @@
   --titles-foreground: #0b2344;
 }
 
+html, body{
+  scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 16px !important;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -20,6 +29,12 @@
 
 * {
   font-family: var(--font-family) !important;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: all 300ms ease-in-out;
   font-weight: 400;
 }
 
