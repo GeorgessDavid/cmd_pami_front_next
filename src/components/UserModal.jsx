@@ -149,19 +149,8 @@ const UserModal = ({ user, open, handleClose, loading }) => {
                                             <Divider variant='middle' flexItem />
                                             <Private_Container>
                                                 <Private_SectionTitle title="Datos del Profesional" />
-                                                <TextGroup icon={<LocalHospitalIcon fontSize='medium' />} label="Especialidad:" value={user?.especialidades?.[0].especialidad || 'No indicado'} />
-
+                                                <TextGroup icon={<LocalHospitalIcon fontSize='medium' />} label="Matrícula Nacional:" value={user?.matricula || 'No indicado'} />
                                             </Private_Container>
-                                            {user?.practicasMedicas?.length > 0 &&
-                                                <Private_Container>
-                                                    <Private_SectionTitle title="Practicas Medicas" />
-                                                    <div className='flex flex-wrap justify-start items-center gap-2 w-full h-full'>
-                                                        {user?.practicasMedicas.map((practica, index) => (
-                                                            <Chip label={practica.practicaMedica} key={index} color='primary' variant='outlined' sx={{ margin: '0.5rem' }} disabled={false} />
-                                                        ))}
-                                                    </div>
-                                                </Private_Container>
-                                            }
                                         </>
                                     }
                                 </div>

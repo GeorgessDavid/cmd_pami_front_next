@@ -8,3 +8,5 @@ export { default as UserBox } from './UserBox';
 export { default as InputGroup } from './InputGroup';
 export { default as UserModal } from './UserModal';
 export { default as TextGroup } from './TextGroup';
+export { default as CustomTooltip } from './CustomTooltip';
+export { default as FormModal } from './FormModal';
