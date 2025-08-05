@@ -1,7 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { SearchInput } from '@/components';
+import { SearchInput, WrappedButton} from '@/components';
+import AddIcon from '@mui/icons-material/Add';
 
 export const UsersList = () => {
     const [currentPage, setCurrentPage] = useState(1);
@@ -33,8 +34,8 @@ export const UsersList = () => {
                 <Pagination count={pages} page={currentPage} color="success" variant='outlined' onChange={handleChange} />
             } */}
             {/*             
-            <WrappedButton icon={<AddIcon />} text="Agregar usuario" action={handleAddOpen}/>
             <AddUser open={addOpen} handleClose={() => setAddOpen(false)} /> */}
+            <WrappedButton icon={<AddIcon />} text="Agregar usuario" action={() => {}}/>
         </div>
     )
 
