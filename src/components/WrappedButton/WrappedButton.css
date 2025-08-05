@@ -33,6 +33,7 @@
     box-sizing: border-box;
     line-height: 3.75rem;
     position: relative;
+    bottom: 4%;
 }
 
 .download-wrapper .download-wrapper-button span {
@@ -40,7 +41,6 @@
     font-weight: 500;
     line-height: 50px;
     position: relative;
-    bottom: 3.75%;
     opacity: 0;
     transition: all 0.3s ease-out;
 }

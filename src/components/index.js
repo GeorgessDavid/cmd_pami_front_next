@@ -4,3 +4,7 @@ export { default as SecondHeader } from './SecondHeader';
 export { default as LogoutModal } from './LogoutModal';
 export { default as SearchInput } from './SearchInput';
 export { default as WrappedButton } from './WrappedButton/WrappedButton';
+export { default as UserBox } from './UserBox';
+export { default as InputGroup } from './InputGroup';
+export { default as UserModal } from './UserModal';
+export { default as TextGroup } from './TextGroup';
