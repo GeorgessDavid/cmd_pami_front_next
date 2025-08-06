@@ -10,3 +10,4 @@ export { default as UserModal } from './UserModal';
 export { default as TextGroup } from './TextGroup';
 export { default as CustomTooltip } from './CustomTooltip';
 export { default as FormModal } from './FormModal';
+export { default as PacientesBox } from './PatientBox';
