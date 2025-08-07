@@ -20,7 +20,9 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.62.0",
-    "styled-components": "^6.1.19"
+    "react-toastify": "^11.0.5",
+    "styled-components": "^6.1.19",
+    "tailwind-scrollbar": "^4.0.2"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

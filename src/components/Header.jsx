@@ -11,7 +11,7 @@ export default function Header({ logged }) {
 
   return (
     <>
-      <header className="flex h-[6vh] items-center justify-between p-4 bg-[#0b2344] border-bottom z-50">
+      <header className="flex h-[6vh] items-center justify-between p-4 bg-[#0b2344] border-bottom">
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-4">
             <Link href="https://app.consultoriosmedicosdavid.com.ar/" title="Volver a CMD App">

@@ -21,7 +21,7 @@ const PacientesBox = ({ paciente, onClick, path, profesional, secretaria, loadin
             </div>
             {profesional && (
                 <Link
-                    href={`${path}/${paciente._id}`}>
+                    href={`${path}/${paciente.id}`} target="_blank">
                     <span className="text-[#334456] font-light transition-all duration-300 opacity-0 group-hover:opacity-100 hover:underline hover:text-[#325d8b]">Abrir historia clínica</span>
                 </Link>
             )}
