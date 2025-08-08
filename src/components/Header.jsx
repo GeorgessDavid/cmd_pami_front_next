@@ -5,6 +5,7 @@ import { Divider, Stack, Tooltip, Chip } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutModal from './LogoutModal';
 import { useState } from 'react';
+import ProfileModal from './ProfileModal';
 
 export default function Header({ logged }) {
   logged = true;
@@ -46,6 +47,21 @@ const UserLogged = ({ logged, rol, nombre, apellido, id }) => {
       <div className="flex">  
         <LogoutModal />
       </div>
+      <ProfileModal open={modalControl} handleClose={() => setModalControl(false)} title="Perfil de Usuario" user={
+        {
+          id: 1,
+          email: "georges.ammiel@example.com",
+          nombre: "Georges",
+          apellido: "David",
+          telefono: "123456789",
+          sexo: "Masculino",
+          matricula: "MN120392",
+          rol: {
+            id: 2,
+            rol: "administrador"
+          }
+        }
+      }/>
     </div>
   )
 }
