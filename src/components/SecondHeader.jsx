@@ -2,10 +2,11 @@
 import Link from 'next/link';
 
 export default function SecondHeader({ rol }) {
+
     return (
         <div className="py-4 px-8 bg-[#f8f9fa] shadow-[0_2px_10px_rgba(0,0,0,0.5)] flex justify-between items-center z-50">
             <nav className="flex items-center gap-4">
-                {rol === 'admin' && <LinkTo href="/usuarios" title="Usuarios" />}
+                {rol == 1 && <LinkTo href="/usuarios" title="Usuarios" />}
                 <LinkTo href="/pacientes" title="Pacientes" />
             </nav>
         </div>

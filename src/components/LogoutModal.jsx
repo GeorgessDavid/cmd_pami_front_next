@@ -3,12 +3,11 @@
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Button } from '@mui/material';
 import { useState } from 'react';
 import LogoutIcon from '@mui/icons-material/Logout';
-// import { useLogout } from '@/hooks/useLogout';
+import { useLogout } from '@/hooks';
 
 export default function LogoutModal() {
     const [open, setOpen] = useState(false);
-    // const { logout } = useLogout();
-    const  logout = () => {};
+    const { logout } = useLogout();
 
 
     const handleClickOpen = () => {

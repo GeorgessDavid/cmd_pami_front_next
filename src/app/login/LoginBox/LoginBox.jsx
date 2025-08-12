@@ -4,7 +4,7 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useLogin } from '@/hooks/usersHooks';
+import { useLogin } from '@/hooks';
 import { redirect } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 export default function LoginBox() {

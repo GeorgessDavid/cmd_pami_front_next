@@ -13,6 +13,7 @@ export const useLogin = () => {
         try {
             const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/login`, {
                 method: 'POST',
+                credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -39,4 +40,3 @@ export const useLogin = () => {
     const resetErrors = () => setErrors(null);
     return { isLogged, loading, error, login, resetErrors };
 };
-

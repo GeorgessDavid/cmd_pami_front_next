@@ -1,1 +1,1 @@
-export * from './usersHooks';
+export * from './userHooks/index';

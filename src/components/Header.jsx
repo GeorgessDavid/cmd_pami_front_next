@@ -4,11 +4,14 @@ import SecondHeader from './SecondHeader';
 import { Divider, Stack, Tooltip, Chip } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutModal from './LogoutModal';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ProfileModal from './ProfileModal';
+import { useLogged } from '@/context/AuthContext';
 
-export default function Header({ logged }) {
-  logged = true;
+
+export default function Header() {
+  const { logged, rol, nombre, apellido, id } = useLogged();
+
 
   return (
     <>
@@ -26,16 +29,20 @@ export default function Header({ logged }) {
             </Link>
           </div>
         </div>
-        <div>
-          <UserLogged logged rol="administrador" nombre="Georges Ammiel" apellido="David" id="1" />
-        </div>
+        {logged ?
+          <div>
+            <UserLogged nombre={nombre} apellido={apellido} id={id} />
+          </div>
+          :
+          <LinkTo href="/login" title="Prestadores" />
+        }
       </header>
-      {logged && <SecondHeader rol="admin" />}
+      {logged && <SecondHeader rol={rol} />}
     </>
   );
 }
 
-const UserLogged = ({ logged, rol, nombre, apellido, id }) => {
+const UserLogged = ({ nombre, apellido, id }) => {
   const [modalControl, setModalControl] = useState(false);
   return (
     <div className="flex justify-between items-center gap-8">
@@ -44,7 +51,7 @@ const UserLogged = ({ logged, rol, nombre, apellido, id }) => {
           <Chip clickable size='medium' onClick={() => setModalControl(true)} icon={<AccountCircleIcon color='white' sx={{ color: 'white !important' }} />} label={`${nombre} ${apellido}`} variant='outlined' sx={{ color: 'white' }} />
         </Stack>
       </Tooltip>
-      <div className="flex">  
+      <div className="flex">
         <LogoutModal />
       </div>
       <ProfileModal open={modalControl} handleClose={() => setModalControl(false)} title="Perfil de Usuario" user={
@@ -61,7 +68,20 @@ const UserLogged = ({ logged, rol, nombre, apellido, id }) => {
             rol: "administrador"
           }
         }
-      }/>
+      } />
     </div>
   )
 }
+
+const LinkTo = ({ href, title }) => {
+  return (
+    <Link
+      href={href}
+    >
+      <span className="relative text-white font-medium after:content-[''] after:absolute after:left-0 after:-bottom-1 after:w-0 after:h-[2px] after:bg-white after:transition-all after:duration-300 hover:after:w-full">
+        {title}
+      </span>
+    </Link>
+  )
+}
+
