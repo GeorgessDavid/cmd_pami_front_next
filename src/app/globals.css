@@ -10,6 +10,7 @@
   --foreground: #171717;
   --font-family: 'Ubuntu', 'Lato', 'Montserrat', 'Inria Sans' ,sans-serif;
   --titles-foreground: #0b2344;
+  --light-foreground: white;
 }
 
 html, body{
@@ -36,6 +37,11 @@ a {
   color: inherit;
   transition: all 300ms ease-in-out;
   font-weight: 400;
+}
+
+*::selection {
+  background-color: var(--titles-foreground);
+  color: var(--light-foreground);
 }
 
 @media (prefers-color-scheme: light) {
