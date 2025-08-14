@@ -28,7 +28,7 @@ const UserBox = ({ user, loading }) => {
                                 <h2 className="text-2xl font-bold text-[var(--titles-foreground)] relative group">
                                     {user?.apellido}, {user?.nombre}
                                 </h2>
-                                <span className="italic text-[#666]">{user?.rol?.rol}</span>
+                                <span className="italic text-[#666]">{user?.rol?.nombre}</span>
                             </>
                         )
                     }

@@ -5,20 +5,14 @@ import { useEffect, useState } from 'react';
 import { TextField, MenuItem, Divider, FormControl, InputLabel, Select, Chip, Stack } from '@mui/material';
 import { CustomTooltip, FormModal } from '@/components';
 import { useForm } from 'react-hook-form';
-// import { useSpecialties } from '@/hooks/useSpecialties';
-// import { useMedicalProcedures } from '@/hooks/useMedicalProcedures';
-// import { useUserCreate } from '@/hooks/useUsers';
 
-export const AddUser = ({ open, handleClose }) => {
+export const AddUser = ({ open, handleClose, submitFunction, loading, progress }) => {
     const [profesionalProperties, setProfesionalProperties] = useState(false);
     const [rol, setRol] = useState('');
     const [sexo, setSexo] = useState('');
 
     const { register, handleSubmit, formState: { errors } } = useForm();
-    // const { loading, createUser, progress } = useUserCreate();
 
-    let loading = false;
-    let progress = 0;
 
     const handleRole = (e) => {
         setRol(e.target.value);
@@ -33,15 +27,11 @@ export const AddUser = ({ open, handleClose }) => {
         setSexo(e.target.value);
     }
 
-    const handleSpecialty = (e) => {
-        setEspecialidad(e.target.value);
-    }
-
     return (
         <FormModal open={open} handleClose={handleClose} title="Agregar usuario" setOpen={handleClose} 
             onsubmit={handleSubmit(async (data) => {
-                data = { ...data, rol, sexo, especialidad, selectedPracticas };
-                await createUser(data);
+                data = { ...data, Rol_id: rol, sexo };
+                await submitFunction(data);
             })} loading={loading} progress={progress}>
             <h3 className="text-[var(--titles-foreground)] font-bold text-2xl">Datos de Usuario</h3>
             <Divider className="bg-[var(--titles-foreground)]" />

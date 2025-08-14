@@ -16,6 +16,7 @@ import MaleIcon from '@mui/icons-material/Male';
 import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
 // import './UserModal.css';
 import { useState, useEffect } from 'react';
+import { useUser } from '@/hooks';
 // import { useUserDelete, useUserUpdate } from '@/hooks/useUsers';
 // import { toast } from 'react-toastify';
 
@@ -131,7 +132,7 @@ const UserModal = ({ user, open, handleClose, loading }) => {
                                         backgroundColor: bgColor[user?.rol?.id - 1]
                                     }}>{iniciales}</Avatar>
                                     <span className="text-[2rem] font-semibold mt-4 text-center">{user?.nombre} {user?.apellido}</span>
-                                    <span className="text-xl italic font-light text-center color-[#707070]">{user?.rol?.rol}</span>
+                                    <span className="text-xl italic font-light text-center color-[#707070]">{user?.rol?.nombre}</span>
                                     <Divider variant='middle' flexItem sx={{ margin: '1rem 0 0' }} />
                                     <Private_Container>
                                         <Private_SectionTitle title="Datos del Usuario" />
