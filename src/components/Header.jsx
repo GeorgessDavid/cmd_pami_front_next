@@ -54,21 +54,7 @@ const UserLogged = ({ nombre, apellido, id }) => {
       <div className="flex">
         <LogoutModal />
       </div>
-      <ProfileModal open={modalControl} handleClose={() => setModalControl(false)} title="Perfil de Usuario" user={
-        {
-          id: 1,
-          email: "georges.ammiel@example.com",
-          nombre: "Georges",
-          apellido: "David",
-          telefono: "123456789",
-          sexo: "Masculino",
-          matricula: "MN120392",
-          rol: {
-            id: 2,
-            rol: "administrador"
-          }
-        }
-      } />
+      <ProfileModal open={modalControl} handleClose={() => setModalControl(false)} title="Perfil de Usuario" id={id}/>
     </div>
   )
 }

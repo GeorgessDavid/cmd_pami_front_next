@@ -58,7 +58,7 @@ export const useUser = (id) => {
     const getUser = useCallback(async () => {
         setLoading(true);
         try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/${id}`, {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/get/${id}`, {
                 method: 'GET',
                 credentials: 'include',
                 headers: {

@@ -1,5 +1,4 @@
 'use client';
-'use client';
 
 import { useEffect, useState } from 'react';
 import { TextField, MenuItem, Divider, FormControl, InputLabel, Select, Chip, Stack } from '@mui/material';

@@ -8,19 +8,18 @@ import { DataDisplay, CustomTooltip, FormModal } from '@/components';
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import { getInitials } from '@/utils';
-
+import { useUser } from '@/hooks';
 import KeyIcon from '@mui/icons-material/Key';
 
-export default function ProfileModal({ open, handleClose, user }) {
-    let loading = false;
+export default function ProfileModal({ open, handleClose, id }) {
     let progress = 0;
-
     const [editMode, setEditMode] = useState(false);
     const [iniciales, setIniciales] = useState('');
     const [bgColor, setBgColor] = useState('');
     const [changePasswordOpen, setChangePasswordOpen] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
 
+    const { user, loading } = useUser(id);
     const { register: updateRegister, handleSubmit: updateHandleSubmit } = useForm();
     const { register: passwordRegister, handleSubmit: handlePasswordSubmit } = useForm();
 
@@ -78,7 +77,7 @@ export default function ProfileModal({ open, handleClose, user }) {
                                             }}>{iniciales}</Avatar>
                                             <div className='flex flex-col'>
                                                 <h2 className="font-bold m-0 text-2xl">{user?.nombre} {user?.apellido}</h2>
-                                                <span className="text-sm text-[#9b9ea0]">{user?.rol?.rol}</span>
+                                                <span className="text-sm text-[#9b9ea0]">{user?.rol?.nombre}</span>
                                             </div>
                                         </div>
                                         <Divider sx={{ margin: '1rem 0' }} />
@@ -91,10 +90,10 @@ export default function ProfileModal({ open, handleClose, user }) {
                                         {editMode &&
                                             <div style={{ display: 'flex', gap: '1rem' }}>
                                                 <IconButton onClick={() => setEditMode(false)}> <CloseIcon color='error' /> </IconButton>
-                                                {!loading && <IconButton type='submit' disabled={progress > 90}> <CheckIcon color='primary' /> </IconButton>}
+                                                {!loading && <IconButton type='submit' disabled={progress > 90}> <CheckIcon color='success' /> </IconButton>}
                                                 {loading &&
                                                     <IconButton disabled>
-                                                        <CircularProgress variant='determinate' size={24} color='primary' value={progress} />
+                                                        <CircularProgress variant='determinate' size={24} color='success' value={progress} />
                                                     </IconButton>
                                                 }
                                             </div>
@@ -102,24 +101,24 @@ export default function ProfileModal({ open, handleClose, user }) {
                                     </div>
                                     {!editMode &&
                                         <>
-                                            <DataDisplay label='Correo Electrónico' value={user.email} />
-                                            <DataDisplay label='Sexo Biológico' value={user.sexo} />
-                                            <DataDisplay label='Teléfono' value={user.telefono || 'No asignado.'} />
+                                            <DataDisplay label='Correo Electrónico' value={user?.email} />
+                                            <DataDisplay label='Sexo Biológico' value={user?.sexo} />
+                                            <DataDisplay label='Teléfono' value={user?.telefono || 'No asignado.'} />
                                         </>
                                     }
                                     {editMode &&
                                         <>
                                             <Tooltip title='El correo electrónico no puede ser modificado.' placement='bottom'>
-                                                <DataDisplay label='Correo Electrónico:' value={user.email} />
+                                                <DataDisplay label='Correo Electrónico:' value={user?.email} />
                                             </Tooltip>
-                                            <TextField label='Nombre' variant='standard' size='small' color='primary' fullWidth defaultValue={user.nombre} {...updateRegister('nombre', { required: 'Debe introducir su nombre.' })} />
-                                            <TextField label='Apellido' variant='standard' size='small' color='primary' fullWidth defaultValue={user.apellido} {...updateRegister('apellido', { required: 'Debe introducir su apellido.' })} />
-                                            <TextField label='Teléfono' variant='standard' size='small' color='primary' fullWidth defaultValue={user.telefono} {...updateRegister('telefono', { required: 'Debe introducir un número de teléfono.' })} />
+                                            <TextField label='Nombre' variant='standard' size='small' color='primary' fullWidth defaultValue={user?.nombre} {...updateRegister('nombre', { required: 'Debe introducir su nombre.' })} />
+                                            <TextField label='Apellido' variant='standard' size='small' color='primary' fullWidth defaultValue={user?.apellido} {...updateRegister('apellido', { required: 'Debe introducir su apellido.' })} />
+                                            <TextField label='Teléfono' variant='standard' size='small' color='primary' fullWidth defaultValue={user?.telefono} {...updateRegister('telefono', { required: 'Debe introducir un número de teléfono.' })} />
                                             <FormControl variant='standard'
                                                 color='primary' fullWidth>
                                                 <InputLabel id='sexo'>Sexo Biológico</InputLabel>
                                                 <Select
-                                                    defaultValue={user.sexo}
+                                                    defaultValue={user?.sexo}
                                                     inputProps={{
                                                         name: 'sexo',
                                                         id: 'sexo',
@@ -141,7 +140,7 @@ export default function ProfileModal({ open, handleClose, user }) {
                                         <Divider sx={{ margin: '1rem 0' }} />
                                         <div className='flex gap-2 flex-col'>
                                             <h2 className="text-2xl font-bold">Información Profesional</h2>
-                                            <DataDisplay label='Matrícula' value={user.matricula || 'No asignado.'} />
+                                            <DataDisplay label='Matrícula' value={user?.matricula || 'No asignado.'} />
                                             <span style={{ fontSize: '0.75rem', fontStyle: 'italic' }}>* La información del profesional sólo puede ser modificada por un administrador.</span>
                                         </div>
                                     </>

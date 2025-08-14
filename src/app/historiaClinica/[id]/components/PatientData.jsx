@@ -1,3 +1,5 @@
+'use client';
+
 import { DataDisplay, CustomTooltip } from "@/components";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import CheckIcon from '@mui/icons-material/Check';
