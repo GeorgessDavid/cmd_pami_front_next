@@ -5,7 +5,7 @@ import { SearchInput, WrappedButton, UserBox } from '@/components';
 import { Pagination } from '@mui/material';
 import { UsersFilter } from './UsersFilter';
 import { AddUser } from './AddUser';
-import { useUsers, useCreateUser } from '@/hooks';
+import { useUsers, useCreateUser, useUpdateUser, useDeleteUser } from '@/hooks';
 import AddIcon from '@mui/icons-material/Add';
 
 export const UsersList = () => {
@@ -15,6 +15,8 @@ export const UsersList = () => {
     const [filterValue, setFilterValue] = useState(0);
     const { loading, error, users, getAllUsers } = useUsers(20, init, filterValue);
     const { success, createUser, loading: createUserLoading, progress } = useCreateUser();
+    const { updateUser, loading: updateLoading, success: updateSuccess, error: updateError } = useUpdateUser();
+    const { deleteUser, loading: deleteLoading, success: deleteSuccess, error: deleteError } = useDeleteUser();
 
     const [addOpen, setAddOpen] = useState(false);
 
@@ -26,7 +28,17 @@ export const UsersList = () => {
             }, 5000);
         }
         console.log(success);
-    }, [success])
+    }, [success]);
+
+    useEffect(() => {
+        if (updateSuccess) {
+            getAllUsers();
+            setTimeout(() => {
+                setAddOpen(false);
+            }, 5000);
+        }
+        console.log(updateSuccess);
+    }, [updateSuccess]);
 
     const handleChange = (e, value) => {
         if (value === 1) {
@@ -49,12 +61,12 @@ export const UsersList = () => {
                         })
                         :
                         users?.length > 0 ? users.map(user => {
-                            return <UserBox key={user.id} user={{ user }} />
+                            return <UserBox key={user.id} user={{ user }} updateFunction={updateUser} updateLoading={updateLoading} updateError={updateError} deleteFunction={deleteUser} deleteLoading={deleteLoading} deleteError={deleteError} />
                         })
 
                             :
                             !loading && users?.length === 0 && <span>No se encontraron resultados.</span>
-                } 
+                }
                 {/* <UserBox user={{ user: pseudoUser }} loading={false} key={1} /> */}
             </div>
             {

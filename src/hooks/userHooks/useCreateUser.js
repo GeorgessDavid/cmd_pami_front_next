@@ -53,7 +53,7 @@ export const useCreateUser = () => {
         if (success) {
             toast.success("Usuario creado exitosamente");
             setTimeout(() => {
-                setSuccess(0);
+                setSuccess(false);
             }, 5000);
         }
     }, [success])

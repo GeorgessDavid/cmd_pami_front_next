@@ -1,12 +1,11 @@
 'use client';
 
 import { Dialog, DialogActions, DialogContent, DialogTitle, Button, Tooltip, Divider, Avatar, Chip } from '@mui/material';
-import { InputGroup, TextGroup } from '@/components';
+import { InputGroup, TextGroup, ConfirmModal } from '@/components';
 import DeleteIcon from '@mui/icons-material/Delete';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
-// import ConfirmModal from '@/components/ConfirmModal/ConfirmModal';
 import CircularProgress from '@mui/material/CircularProgress';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
@@ -14,17 +13,16 @@ import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import FemaleIcon from '@mui/icons-material/Female';
 import MaleIcon from '@mui/icons-material/Male';
 import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
-// import './UserModal.css';
 import { useState, useEffect } from 'react';
-import { useUser } from '@/hooks';
-// import { useUserDelete, useUserUpdate } from '@/hooks/useUsers';
-// import { toast } from 'react-toastify';
+import { useForm } from 'react-hook-form';
 
-const UserModal = ({ user, open, handleClose, loading }) => {
+const UserModal = ({ user, open, handleClose, loading, updateUser, updateLoading, error, deleteFunction }) => {
     const [editMode, setEditMode] = useState(false);
     const [deleteOpen, setDeleteOpen] = useState(false);
     const bgColor = ['#f9d57d', '#7e9cf4', '#fa8283'];
     const [iniciales, setIniciales] = useState('');
+
+    const { register, handleSubmit } = useForm()
 
 
     const handleEditMode = () => {
@@ -35,56 +33,13 @@ const UserModal = ({ user, open, handleClose, loading }) => {
         setDeleteOpen(!deleteOpen);
     }
 
-    // const { deleteUser } = useUserDelete();
-    // const { updateUser, loading: updateLoading, status, error: updateError } = useUserUpdate();
+    const handleChange = () => {
 
-    // const handleDelete = () => {
-    //     deleteUser(user?.id);
-    // }
+    }
 
-    // const handlesubmit = (e) => {
-    //     let body = new Object();
-
-    //     for (let i = 0; i < e.target.length; i++) {
-    //         if (e.target[i].name) {
-    //             body[e.target[i].name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "")] = e.target[i].value;
-    //         }
-    //         if (e.target[i].name && e.target[i].value.length === 0) {
-    //             setError(true);
-    //             setErrorMessage(`El campo ${e.target[i].name} no puede estar vacío.`);
-    //         }
-    //         if (e.target[i].name === 'email' && !e.target[i].value.includes('@')) {
-    //             setError(true);
-    //             setErrorMessage('El email ingresado no es válido.');
-    //         }
-
-    //     }
-    //     if (!error) {
-    //         updateUser(body);
-    //         e.preventDefault();
-    //     }
-    // }
-
-    // const handleChange = () => {
-    //     setError(false);
-    //     setErrorMessage(undefined);
-    // }
-
-    // useEffect(() => {
-    //     if (error) toast.error(errorMessage);
-    // }, [error, errorMessage])
-
-    // useEffect(() => {
-    //     if (status === 200 && !loading) {
-    //         setTimeout(() => {
-    //             window.location.reload();
-    //         }, 5000);
-    //     }
-    // }, [loading, status])
-
-    // useEffect(() => {
-    //     if (updateError) setError(true);
-    // }, [updateError])
+    useEffect(() => {
+        if (!updateLoading) setEditMode(false);
+    }, [updateLoading]);
 
     const obtenerIniciales = ({ nombre, apellido }) => {
         const primeraInicial = nombre?.split(" ")[0]?.charAt(0).toUpperCase() || "";
@@ -107,7 +62,13 @@ const UserModal = ({ user, open, handleClose, loading }) => {
                 maxWidth='sm'
                 fullWidth
             >
-                <form /* onSubmit={handlesubmit} */ onChange={() => { /* handleChange() */ }}>
+                <form onSubmit={handleSubmit(async (values) => {
+                    try {
+                        await updateUser(values);
+                    } catch (err) {
+                        console.log(err);
+                    }
+                })} onChange={() => { /* handleChange() */ }}>
                     <DialogTitle id="alert-dialog-title" sx={{
                         fontSize: '1.5rem',
                         fontWeight: 'bold',
@@ -156,15 +117,15 @@ const UserModal = ({ user, open, handleClose, loading }) => {
                                     }
                                 </div>
                                 : <>
-                                    <div className='d-flex w25-75'>
-                                        <InputGroup label='ID' type='text' editMode={editMode} value={user?.id} loading={loading} disabled={true} />
-                                        <InputGroup label='Rol' type='text' editMode={editMode} value={user?.rol?.rol} loading={loading} disabled={true} />
+                                    <div className='flex gap-4'>
+                                        <InputGroup className="flex-[1]" label='ID' type='text' editMode={editMode} defaultValue={user?.id} {...register('id')} loading={loading} disabled={true} />
+                                        <InputGroup className="flex-[3]" label='Rol' type='text' editMode={editMode} defaultValue={user?.rol?.nombre} loading={loading} disabled={true} />
                                     </div>
-                                    <InputGroup label='Nombre' type='text' resetErrors={handleChange} editMode={editMode} value={user?.nombre} loading={loading} error={error} errorMessage={errorMessage} />
-                                    <InputGroup label='Apellido' type='text' resetErrors={handleChange} editMode={editMode} value={user?.apellido} loading={loading} error={error} errorMessage={errorMessage} />
-                                    <InputGroup label='Email' type='email' resetErrors={handleChange} editMode={editMode} value={user?.email} loading={loading} error={error} errorMessage={errorMessage} />
-                                    <InputGroup label='Sexo Biológico' type='text' editMode={editMode} value={user?.sexo} loading={loading} disabled={true} />
-                                    <InputGroup label='Teléfono' type='text' customType={true} resetErrors={handleChange} editMode={editMode} value={user?.telefono ? user.telefono : 'No indicado.'} loading={loading} />
+                                    <InputGroup label='Nombre' {...register('nombre')} type='text' resetErrors={handleChange} editMode={editMode} defaultValue={user?.nombre} loading={loading} error={error} />
+                                    <InputGroup label='Apellido' {...register('apellido')} type='text' resetErrors={handleChange} editMode={editMode} defaultValue={user?.apellido} loading={loading} error={error} />
+                                    <InputGroup label='Email' type='email' resetErrors={handleChange} editMode={editMode} defaultValue={user?.email} loading={loading} error={false} disabled={true} />
+                                    <InputGroup label='Sexo Biológico' type='text' editMode={editMode} defaultValue={user?.sexo} loading={loading} disabled={true} />
+                                    <InputGroup label='Teléfono' {...register('telefono')} type='text' customType={true} resetErrors={handleChange} editMode={editMode} defaultValue={user?.telefono ? user.telefono : 'No indicado.'} loading={loading} />
                                 </>
                             }
                         </DialogContent>
@@ -240,10 +201,10 @@ const UserModal = ({ user, open, handleClose, loading }) => {
                                 </>
                             )
                         }
-
                     </DialogActions>
                 </form>
             </Dialog>
+            <ConfirmModal open={deleteOpen} handleClose={() => setDeleteOpen(false)} handleConfirm={async () =>  await deleteFunction(user?.id)} title='Eliminar Usuario' message={`¿Estás seguro de que deseas eliminar a ${user?.nombre} ${user?.apellido}?`} />
         </>
     )
 }

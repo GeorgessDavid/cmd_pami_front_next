@@ -3,8 +3,8 @@
 import { Skeleton, TextField } from '@mui/material';
 import { useState } from 'react';
 
-const InputGroup = ({ label, type, value, editMode, loading, disabled, error, resetErrors, customType }) => {
-    const [newValue, setNewValue] = useState(value || '');
+const InputGroup = ({ label, type, defaultValue, editMode, loading, disabled, error, resetErrors, customType, className, ...rest}) => {
+    // const [newValue, setNewValue] = useState(value || '');
 
     const handleChange = (e) => {
         resetErrors();
@@ -18,7 +18,7 @@ const InputGroup = ({ label, type, value, editMode, loading, disabled, error, re
     }
 
     return (
-        <div className="flex items-center w-full my-4">
+        <div className={`flex items-center w-full my-4 ${className || ''}`}>
             {
                 loading ?
                     <div className="flex items-center w-full my-4">
@@ -35,9 +35,11 @@ const InputGroup = ({ label, type, value, editMode, loading, disabled, error, re
                             variant="standard"
                             color="primary"
                             type={type}
-                            value={newValue}
+                            // value={newValue}
+                            defaultValue={defaultValue}
                             disabled={disabled}
                             error={error}
+                            {...rest}
                             fullWidth />
                         :
                         <>

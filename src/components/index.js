@@ -12,3 +12,4 @@ export { default as CustomTooltip } from './CustomTooltip';
 export { default as FormModal } from './FormModal';
 export { default as PacientesBox } from './PatientBox';
 export { default as DataDisplay } from './DataDisplay';
+export { default as ConfirmModal } from './ConfirmModal';

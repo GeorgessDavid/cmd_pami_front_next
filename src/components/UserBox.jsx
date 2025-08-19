@@ -1,9 +1,9 @@
 'use client';
 
 import { Tooltip, Skeleton } from '@mui/material';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { UserModal } from '@/components';
-const UserBox = ({ user, loading }) => {
+const UserBox = ({ user, loading, updateFunction, updateLoading, updateError, deleteFunction }) => {
     const [open, setOpen] = useState(false);
 
     // To check if the user object is valid.
@@ -12,6 +12,14 @@ const UserBox = ({ user, loading }) => {
     const handleClose = () => {
         setOpen(!open);
     }
+
+    useEffect(() => {
+        if (!updateLoading) {
+            setTimeout(() => {
+                setOpen(false);
+            }, 5000)
+        }
+    }, [updateLoading])
 
     return (
         <div className="w-[22.5%] border-[#ccc] border-2 py-4 px-8 my-4 mx-2 cursor-pointer transition-all duration-300 bg-[#ececec] hover:shadow-[0_0_10px_rgba(0,0,0,0.1)]">
@@ -34,7 +42,7 @@ const UserBox = ({ user, loading }) => {
                     }
                 </div>
             </Tooltip>
-            <UserModal user={user} open={open} handleClose={handleClose} loading={loading} />
+            <UserModal user={user} open={open} handleClose={handleClose} loading={loading} updateUser={updateFunction} updateLoading={updateLoading} error={updateError} deleteFunction={deleteFunction} />
         </div>
     )
 }
