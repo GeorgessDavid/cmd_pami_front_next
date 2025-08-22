@@ -1,12 +1,12 @@
 import { TextContainer } from "@/components";
 
-export default function Home() {
+export default async function Home() {
 
   // TODO - Implement middleware to check if the user is authenticated
   // If not authenticated, redirect to the login page
   // If authenticated, render the main content of the page
   // For now, just return a simple layout
-  // Later, we will add the authentication logic
+  // Later, we will add the authentication logic.
 
   return (
     <div className="flex justify-center items-start w-full h-full bg-no-repeat bg-cover">

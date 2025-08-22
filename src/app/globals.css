@@ -8,12 +8,13 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --font-family: 'Ubuntu', 'Lato', 'Montserrat', 'Inria Sans' ,sans-serif;
+  --font-family: 'Ubuntu', 'Lato', 'Montserrat', 'Inria Sans', sans-serif;
   --titles-foreground: #0b2344;
   --light-foreground: white;
 }
 
-html, body{
+html,
+body {
   scroll-behavior: smooth;
   margin: 0;
   padding: 0;
@@ -55,4 +56,53 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-family)
+}
+
+.loading-screen {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.849);
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  top: 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  z-index: 9999;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.loading-text::before {
+  content: "";
+}
+
+.loading-text::after {
+  content: "";
+  font-size: 3rem;
+  font-weight: bold;
+  animation: loading 3s linear infinite;
+}
+
+@keyframes loading {
+  0% {
+    content: "Cargando";
+  }
+
+  25% {
+    content: "Cargando.";
+  }
+
+  50% {
+    content: "Cargando..";
+  }
+
+  75% {
+    content: "Cargando...";
+  }
+
+  100% {
+    content: "Cargando";
+  }
 }
